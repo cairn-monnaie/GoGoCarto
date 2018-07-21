@@ -32,10 +32,12 @@ chown -R $WEB_USR $WEB_DIR
 cd  $WEB_DIR
 
 
-#COMPOSER
+# COMPOSER
 cd /usr/src
 sudo apt-get install -y curl php5-cli
 curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin --filename=composer
+# Composer Bis
+sudo apt install composer
 
 # MONGODB
 sudo apt-get install -y make php5-dev php-pear
@@ -47,7 +49,6 @@ ln -s /usr/lib/x86_64-linux-gnu/libssl.a /usr/local/openssl/lib/libssl.a
 ln -s /usr/lib/x86_64-linux-gnu/libssl.so /usr/local/openssl/lib/
 pecl install mongodb
 pecl install mongo
-
 
 sudo apt-get install -y mongodb-org
 
@@ -61,11 +62,24 @@ else
     echo "extension=mongo.so" >> /etc/php5/fpm/php.ini
 fi
 
-# NODEJSsudo apt-get install -y make php5-dev php-pear
-curl -sL https://deb.nodesource.com/setup_7.x | sudo -E bash -
+# MongoDB php 7
+sudo apt install php7.0-dev php-pear
+sudo pecl install mongodb
+if grep "extension=mongodb.so" /etc/php5/cli/php.ini 
+then
+    echo "extenstion deja configuree";
+else
+    echo "extension=mongodb.so" >> /etc/php/7.0/cli/php.ini
+    echo "extension=mongo.so" >> /etc/php/7.0/cli/php.ini
+    echo "extension=mongodb.so" >> /etc/php/7.0/apache2/php.ini
+    echo "extension=mongo.so" >> /etc/php/7.0/apache2/php.ini
+fi
+
+# NODEJS
+curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
 sudo apt-get install -y nodejs
-curl -L https://npmjs.org/install.sh | sudo s
-h
+curl -L https://npmjs.org/install.sh | sudo sh
+
 # PULL CODE
 cd $WEB_DIR
 git clone -b master https://github.com/pixelhumain/GoGoCarto.git
