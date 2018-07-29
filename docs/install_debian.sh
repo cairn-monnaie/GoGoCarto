@@ -75,6 +75,14 @@ else
     echo "extension=mongo.so" >> /etc/php/7.0/apache2/php.ini
 fi
 
+# MongoDB ter
+sudo apt install php-mbstring
+sudo apt install php7.0-bcmath
+sudo apt install mongodb
+sudo apt install php7.0-mongodb
+composer config "platform.ext-mongo" "1.6.16" && composer require alcaeus/mongo-php-adapter
+echo "extension=mongodb.so" >> /etc/php/7.0/cli/php.ini
+
 # NODEJS
 curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
 sudo apt-get install -y nodejs
