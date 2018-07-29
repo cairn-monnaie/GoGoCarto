@@ -161,11 +161,6 @@ php bin/console doctrine:mongodb:generate:hydrators ;
 php bin/console doctrine:mongodb:generate:proxies ;
 php bin/console doctrine:mongodb:fixtures:load ;
 
-php bin/console doctrine:schema:update --force
-php bin/console doctrine:fixtures:load
-
-php bin/console cache:clear --env=prod;
-
 chmod -R 777 var/;
 
 # adding crontab task
